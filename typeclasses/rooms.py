@@ -21,6 +21,9 @@ class Room(DefaultRoom):
     """
     pass
 
+    #def return_appearance(self,looker):
+        #pass
+
 class CharGenRoom(Room):
     """
     This is only used by rooms in Character Generation.
