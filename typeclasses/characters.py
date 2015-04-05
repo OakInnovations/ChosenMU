@@ -268,7 +268,8 @@ class Character(DefaultCharacter):
             return
 
         # get description, build string
-        string = "{c%s{n\n" % self.key
+        mxpstr = "{lclook " + self.key + "|finger " + self.key + "|examine " + self.key + "{lt" + self.key + "{le"
+        string = "{c%s{n\n" % mxpstr
                 
         if self.db.sex.lower() == "male":
                 pronoun = "he"
