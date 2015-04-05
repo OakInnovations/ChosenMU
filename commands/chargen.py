@@ -3,6 +3,7 @@ This file contains the commands used in CharGen rooms.
 """
 
 from commands.command import Command
+from commands.command import MuxCommand
 
 class CG_SetHair(Command):
     """
@@ -28,7 +29,7 @@ class CG_SetHair(Command):
         if not self.args:
             caller.msg(_errormsg_)
             return
-        caller.db.hair = self.args
+        caller.db.hair = self.args.strip()
         caller.msg("You have set your hair string to: {c" + self.args + "{n")
 
 
@@ -57,7 +58,7 @@ class CG_SetEyes(Command):
         if not self.args:
             caller.msg(_errormsg_)
             return
-        caller.db.eyes = self.args
+        caller.db.eyes = self.args.strip()
         caller.msg("You have set your eyes string to: {c" + self.args + "{n")
 
 class CG_SetSex(Command):
@@ -82,7 +83,7 @@ class CG_SetSex(Command):
             return
 
         args = self.args.lower().strip()
-        caller.msg("DEBUG!  args:.." + args + "..")
+        #caller.msg("DEBUG!  args:.." + args + "..")
 
         if args == "male" or args == "m":
             caller.db.sex = "male"
@@ -94,53 +95,55 @@ class CG_SetSex(Command):
         caller.msg("You have set your sex to " + caller.db.sex)
 
 
-class CG_SetHeight_Feet(Command):
+class CG_SetHeight(MuxCommand):
     """
     This command sets your height in feet.
 
-    {cUSAGE{n: setheight-feet {y<height in feet>{n
+    {cUSAGE{n: setheight <"feet" or "inches"> = {y<feet or inches>{n
+
+    For example, to make a character 6'3", you would enter:
+       {ysetheight feet = 6{n
+    and then...
+       {ysetheight inches = 3{n
     """
 
-    key = "setheight-feet"
-    aliases = ["sheight-feet", "setfeet", "sheightf", "feet"]
+    key = "setheight"
+    aliases = ["sheight", "height"]
     help_category = "Character Generation"
 
     def func(self):
         caller = self.caller
-        _errormsg_ = "You have to tell me how many feet tall you are!"
-        _ooberr_ = "You have to provide a height that is at least 4 feet, and no taller than 7 feet."
+        _errormsg_ = "You have to tell me how many tall you are!"
+        _errusage_ = "{cUSAGE{n:  {ysetheight <'feet' or 'inches'> = <feet or inches>{n"
+        _ooberrf_ = "You have to provide a height that is at least 4 feet, and no taller than 7 feet."
+        _ooberri_ = "You have to provide a number of inches between 0 and 11...12 inches would be another foot!"
         if not self.args:
             caller.msg(_errormsg_)
             return
-        if self.args < 4 or self.args > 7:
-            caller.msg(_ooberr_)
+        if not self.rhs:
+            caller.msg(_errusage_)
             return
-        caller.db.height_feet = self.args
-        caller.msg("You have set your height in feet to: " + caller.db.height_feet)
 
-class CG_SetHeight_Inches(Command):
-    """
-    This command sets your height in inches.
+        choice = self.lhs.lower()
+        height = int(self.rhs.strip())
 
-    {cUSAGE{n:  setheight-inches {y<height in inches>{n
-    """
+        if choice == "feet" or choice == "ft":
+            if height < 4 or height > 7:
+                caller.msg(_ooberrf_)
+                return
+            caller.db.height_feet = height
+            caller.msg("You have set your height to " + str(caller.db.height_feet) + " feet.")
+            caller.msg("This makes your height look like: " + str(caller.db.height_feet) + " feet, " + str(caller.db.height_inches) + " inches.")
+        elif choice == "inches" or choice == "in":
+            if height < 0 or height > 11:
+                caller.msg(_ooberri_)
+                return
+            caller.db.height_inches = height
+            caller.msg("You have set your height to " + str(caller.db.height_inches) + " inches.")
+            caller.msg("This makes your height look like: " + str(caller.db.height_feet) + " feet, " + str(caller.db.height_inches) + " inches.")
+        else:
+            caller.msg(_errusage_)
 
-    key = "setheight-inches"
-    aliases = ["sheight-inches", "setinches", "sheighti", "inches"]
-    help_category = "Character Generation"
-
-    def func(self):
-        caller = self.caller
-        _errormsg_ = "You have to tell me how many inches tall you are!"
-        _ooberr_ = "You have to provide a number of inches from 0 to 11.  (12 inches would be another foot, after all)"
-        if not self.args:
-            caller.msg(_errormsg_)
-            return
-        if self.args < 0 or self.args > 11:
-            caller.msg(_ooberr_)
-            return
-        caller.db.height_inches = self.args
-        caller.msg("You have set your height in inches to: " + caller.db.height_inches)
 
 class CG_SetWeight(Command):
     """
@@ -160,8 +163,8 @@ class CG_SetWeight(Command):
         if not self.args:
             caller.msg(_errormsg_)
             return
-        if self.args > 500 or self.args < 50:
+        if int(self.args.strip()) > 500 or int(self.args.strip()) < 50:
             caller.msg(_ooberr_)
             return
-        caller.db.weight = self.args
-        caller.msg("You have set your weight to: " + caller.db.weight)
+        caller.db.weight = int(self.args.strip())
+        caller.msg("You have set your weight to: " + str(caller.db.weight))

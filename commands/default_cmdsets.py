@@ -116,7 +116,6 @@ class CharGenCmdSet(CmdSet):
         self.add(CG_SetHair())
         self.add(CG_SetEyes())
         self.add(CG_SetSex())
-        self.add(CG_SetHeight_Feet())
-        self.add(CG_SetHeight_Inches())
+        self.add(CG_SetHeight())
         self.add(CG_SetWeight())
 
