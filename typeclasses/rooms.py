@@ -6,6 +6,7 @@ Rooms are simple containers that has no location of their own.
 """
 
 from evennia import DefaultRoom
+from commands.default_cmdsets import CharGenCmdSet
 
 
 class Room(DefaultRoom):
@@ -19,3 +20,22 @@ class Room(DefaultRoom):
     properties and methods available on all Objects.
     """
     pass
+
+class CharGenRoom(Room):
+    """
+    This is only used by rooms in Character Generation.
+    Please note that with the way that this is set up,
+    somebody who knows what they're doing could theoretically
+    completely create their character in the first room of
+    CharGen and go 'home'.  This is WORKING AS INTENDED.  We
+    don't want to penalize experienced players by making them
+    wade through all of the explanations over and over.  The
+    rooms themselves should be used as a tutorial to creating
+    a character, and what the various statistics mean.
+    """
+
+    def at_object_creation(self):
+        """
+        Called only at the first creation.
+        """
+        self.cmdset.add(CharGenCmdSet, permanent=True)

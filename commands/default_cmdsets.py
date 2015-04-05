@@ -15,10 +15,12 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 """
 
 from evennia import default_cmds
+from evennia.commands.cmdset import CmdSet
 from commands.wiz_commands import *
 from commands.command import *
 from commands.train import *
 from commands.charsheet import CharSheet
+from commands.chargen import *
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
     """
@@ -37,10 +39,10 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         # any commands you add below will overload the default ones.
         #
         self.add(WizCmdAddxp())
-	self.add(WizCmdCheckAtts())
-	self.add(WizHurtChar())
-	self.add(CmdBasicTrain())
-	self.add(CharSheet())
+        self.add(WizCmdCheckAtts())
+        self.add(WizHurtChar())
+        self.add(CmdBasicTrain())
+        self.add(CharSheet())
 
 
 class PlayerCmdSet(default_cmds.PlayerCmdSet):
@@ -98,3 +100,22 @@ class SessionCmdSet(default_cmds.SessionCmdSet):
         #
         # any commands you add below will overload the default ones.
         #
+
+
+class CharGenCmdSet(CmdSet):
+    """
+    This contains the commands used in Character Generation rooms.
+    """
+
+    key="Chargen"
+
+    def at_cmdset_creation(self):
+        """
+        #This is called when the commandsset is created.
+        """
+        self.add(CG_SetHair())
+        self.add(CG_SetEyes())
+        self.add(CG_SetSex())
+        self.add(CG_SetHeight())
+        self.add(CG_SetWeight())
+

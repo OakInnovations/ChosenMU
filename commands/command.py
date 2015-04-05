@@ -127,56 +127,5 @@ class MuxCommand(default_cmds.MuxCommand):
         # this can be removed in your child class, it's just
         # printing the ingoing variables as a demo.
         super(MuxCommand, self).func()
+		
 
-class CmdStats(MuxCommand):
-    """
-    Test stats display
-    """
-
-    key = "stats"
-    aliases = ["stat", "sco"]
-    locks = "cmd:all()"
-    help_category = "General"
-
-    def func(self):
-        if self.switches:
-            self.showabils()
-            return
-        caller = self.caller
-        caller.msg("=-=-=-=-=-=-=-=-=- (\o/) -=-=-=-=-=-=-=-=-=-=")
-        caller.msg("Level " + str(int(caller.db.level)))
-        caller.msg("Experience")
-        caller.msg("--Available:  " + str(int(caller.db.experience['current'])))
-        caller.msg("--Spent:      " + str(int(caller.db.experience['spent'])))
-        caller.msg("--Total:      " + str(int(caller.db.experience['current'] + caller.db.experience['spent']))) 
-        caller.msg("------------------ STATS --------------------")
-        caller.msg(" Strength:     " + str(caller.db.atts['str']) + "    |  Intelligence: " + str(caller.db.atts['int']))
-        caller.msg(" Dexterity:    " + str(caller.db.atts['dex']) + "    |  Wisdom:       " + str(caller.db.atts['wis']))
-        caller.msg(" Constitution: " + str(caller.db.atts['con']) + "    |  Charisma:     " + str(caller.db.atts['cha']))
-        caller.msg("------ SKILLS -------+----- KNOWLEDGES ------")
-        caller.msg(" Brawling      " + str(caller.db.skills['brawling']) + "    |  Computer Science " + str(caller.db.knowledges['computer science']))
-        caller.msg(" Martial Arts  " + str(caller.db.skills['martial arts']) + "    |  Demonic Lore     " + str(caller.db.knowledges['demonic lore']))
-        caller.msg(" Melee         " + str(caller.db.skills['melee']) + "    |  History          " + str(caller.db.knowledges['history']))
-        caller.msg(" Programming   " + str(caller.db.skills['programming']) + "    |  Magical Theory   " + str(caller.db.knowledges['magical theory']))
-        
-    def showabils(self):
-        caller = self.caller
-
-        caller.msg("---------------- ABILITIES ------------------")
-        caller.msg(" Ritual Magic          Elemental Magic")
-        caller.msg(" --Basic: " + str(caller.db.abils['ritual magic']['basic']['level']) + "            --Basic:   " + str(caller.db.abils['elemental magic']['basic']['level']))
-        caller.msg(" ---Points: " + str(caller.db.abils['ritual magic']['basic']['points']) + "          ---Points: " + str(caller.db.abils['elemental magic']['basic']['points']))
-        caller.msg(" ----Minor Boost:  " + str(caller.db.abils['ritual magic']['basic']['powers']['minor boost']) + "   ----Dazzle: " + str(caller.db.abils['elemental magic']['basic']['powers']['dazzle']))
-        caller.msg(" ----Minor Shield: " + str(caller.db.abils['ritual magic']['basic']['powers']['minor shield']) + "   ----Flame Dart: " + str(caller.db.abils['elemental magic']['basic']['powers']['flame dart']))
-        caller.msg(" ----Sunvisor:     " + str(caller.db.abils['ritual magic']['basic']['powers']['sunvisor']) + "   --Normal:  " + str(caller.db.abils['elemental magic']['normal']['level']))
-        caller.msg(" --Normal: " + str(caller.db.abils['ritual magic']['basic']['level']) + "           ---Points: " + str(caller.db.abils['elemental magic']['normal']['points']))
-        caller.msg(" ---Points: " + str(caller.db.abils['ritual magic']['normal']['points']) + "          --Intermediate:  " + str(caller.db.abils['elemental magic']['intermediate']['level']))
-        caller.msg(" ----Boost:        " + str(caller.db.abils['ritual magic']['normal']['powers']['boost']) + "   ---Points:  " + str(caller.db.abils['elemental magic']['intermediate']['points']))
-        caller.msg(" ----Shield:       " + str(caller.db.abils['ritual magic']['normal']['powers']['shield']) + "   --Advanced:  " + str(caller.db.abils['elemental magic']['advanced']['level']))
-        caller.msg(" ----Sunshade:     " + str(caller.db.abils['ritual magic']['normal']['powers']['sunshade']) + "   ---Points:  " + str(caller.db.abils['elemental magic']['advanced']['points']))
-        caller.msg(" --Intermediate:  " + str(caller.db.abils['ritual magic']['intermediate']['level']) + "    --Master:  " + str(caller.db.abils['elemental magic']['master']['level']))
-        caller.msg(" ---Points:  " + str(caller.db.abils['ritual magic']['intermediate']['points']) + "         ---Points:  " + str(caller.db.abils['elemental magic']['master']['points']))
-        caller.msg(" --Advanced:  " + str(caller.db.abils['ritual magic']['advanced']['level']))
-        caller.msg(" ---Points:  " + str(caller.db.abils['ritual magic']['advanced']['points']))
-        caller.msg(" --Master:  " + str(caller.db.abils['ritual magic']['master']['level']))
-        caller.msg(" ---Points:  " + str(caller.db.abils['ritual magic']['master']['points']))

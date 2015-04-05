@@ -9,6 +9,9 @@ creation commands.
 """
 from evennia import DefaultCharacter
 from evennia import TICKER_HANDLER
+from evennia.server.sessionhandler import SESSIONS
+#from server.conf.oobfuncs import *
+#from evennia.server.serversession import *
 
 class Character(DefaultCharacter):
     """
@@ -29,8 +32,71 @@ class Character(DefaultCharacter):
                     has connected" message echoed to the room
 
     """
+
+        
     def at_object_creation(self):
+        #set up hook for self-healing heartbeat
         TICKER_HANDLER.add(self,10,hook_key="health_ticker")
+        #set up desc attributes
+        self.db.eyes = "blank"
+        self.db.hair = "no"
+        self.db.height_feet = 6
+        self.db.height_inches = 0
+        self.db.weight = 0
+        self.db.sex = "Male"
+        #set up bodyparts available
+        self.db.bodyparts = {"head":{
+                                    "desc": "",
+                                    "hp": 1,
+                                    "weartype": ["hat","helmet"]
+                                    },
+                            "left arm":{
+                                        "desc": "",
+                                        "hp": 1,
+                                        "weartype": [None]
+                                        },
+                            "left hand":{
+                                        "desc": "",
+                                        "hp": 1,
+                                        "weartype": ["glove","ring","bracelet"]
+                                        },
+                            "right arm":{
+                                        "desc": "",
+                                        "hp": 1,
+                                        "weartype": [None]
+                                        },
+                            "right hand":{
+                                        "desc": "",
+                                        "hp": 1,
+                                        "weartype": ["glove","ring","bracelet"]
+                                        },
+                            "torso":{
+                                    "desc": "",
+                                    "hp": 5,
+                                    "weartype": ["shirt", "jacket", "cloak", "armor"]
+                                    },
+                            "left leg":{
+                                        "desc": "",
+                                        "hp": 1,
+                                        "weartype": ["pants"]
+                                        },
+                            "left foot":{
+                                        "desc": "",
+                                        "hp": 1,
+                                        "weartype": ["boot"]
+                                        },
+                            "right leg":{
+                                        "desc": "",
+                                        "hp": 1,
+                                        "weartype": ["pants"]
+                                        },
+                            "right foot":{
+                                        "desc": "",
+                                        "hp": 1,
+                                        "weartype": ["boot"]
+                                        }
+                            }
+        #set up basic character stats
         self.db.maxHP = 10
         self.db.maxSP = 0
         self.db.curHP = 10
@@ -155,22 +221,22 @@ class Character(DefaultCharacter):
 
         #The ability to do stuff.  Pick locks. Work with a computer.  Balance a checkbook.
         self.db.skills = {"programming": 0, 
-                                          "martial arts": 0, 
-                                          "melee": 0, 
-                                          "brawling": 0, }
+                          "martial arts": 0, 
+                          "melee": 0, 
+                          "brawling": 0, }
         #The ability to know things.  History.  Magical theory.  Scientific theory.
         self.db.knowledges = {"computer science": 0, 
-                                                  "magical theory": 0, 
-                                                  "history": 0, 
-                                                  "demonic lore": 0}
+                              "magical theory": 0, 
+                              "history": 0, 
+                              "demonic lore": 0}
         #Current job is where you work.  Jobs db is a list of dictionaries, describing the
         #stats of each job that you have held.  Couch potato is the default job, and pays
         #$100 per week.
         self.db.current_job = "Couch Potato"
         self.db.jobs = [{"job_title": "Couch Potato", 
-                                         "payscale": 100.00, 
-                                         "job_level": 1, 
-                                         "job_xp": 0}]
+                         "payscale": 100.00, 
+                         "job_level": 1, 
+                         "job_xp": 0}]
         #How much experience you have, and how much you have spent.  Total xp is calculate at runtime
         self.db.experience = {"current": 0, "spent": 0}
 
@@ -189,3 +255,56 @@ class Character(DefaultCharacter):
     def at_tick(self, *args, **kwargs):
         #trying to keep a " 'Character' object has no attribute 'at_tick' " error from happening.
         pass
+	
+    def return_appearance(self,looker):
+        """
+        This formats a description. It is the hook a 'look' command
+        should call.
+
+        Args:
+            looker (Object): Object doing the looking.
+        """
+        if not looker:
+            return
+
+        # get description, build string
+        string = "{c%s{n\n" % self.key
+                
+        if self.db.sex.lower() == "male":
+                pronoun = "he"
+                ppronoun = "his"
+                sex = "He is male."
+        elif self.db.sex.lower() == "female":
+                pronoun = "she"
+                ppronoun = "her"
+                sex = "She is female."
+        else:
+                pronoun = "it"
+                ppronoun = "its"
+                sex = "Its gender is not clear."
+        
+        eyes = pronoun.capitalize() + " has " + self.db.eyes + " eyes."
+        hair = pronoun.capitalize() + " has " + self.db.hair + " hair."
+        height = pronoun.capitalize() + " is " + str(self.db.height_feet) + " feet, " + str(self.db.height_inches) + " inches tall."
+        weight = pronoun.capitalize() + " is roughly " + str(self.db.weight) + " pounds."
+        """
+        bodyparts = ""
+        for part in self.db.bodyparts:
+            if part['desc']:
+                bodyparts += ppronoun.capitalize() + " " + key + " " + self.db.bodyparts[part]['desc'] + "\n"
+        """
+        
+        desc = self.db.desc
+        if eyes:
+            string += "\n" + eyes
+        if hair:
+            string += "\n" + hair
+        if height:
+            string += "\n" + height
+        if weight:
+            string += "\n" + weight
+        if desc:
+            string += "\n\n%s" % desc
+        string += "\n"
+
+        return string
