@@ -1,3 +1,16 @@
+# This...is...ChosenMU!
+
+These are the world and development files for ChosenMU, an
+Evennia-based MU* set in the BuffyVerse.
+
+Well...eventually it will be.  The beautiful part about Evennia
+is that it can be modified to anything necessary.  The bad part
+about Evennia is...it *has* to be modified to whatever is necessary.
+
+I actually like that part, though, so the bad parts aren't bad, as
+far as I'm concerned.  Below is the original readme from the imported
+Evennia world files.
+
 # Welcome to Evennia!
 
 This directory is your game directory, set up to let you start with
