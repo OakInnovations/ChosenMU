@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{a98ecdf6-93c8-4be6-9519-583951a6e255}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>__init__.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>{80659ab7-4d53-4e0c-8588-a766116cbd46}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="commands\chargen.py" />
+    <Compile Include="commands\charsheet.py" />
+    <Compile Include="commands\command.py" />
+    <Compile Include="commands\default_cmdsets.py" />
+    <Compile Include="commands\test.py" />
+    <Compile Include="commands\train.py" />
+    <Compile Include="commands\wiz_commands.py" />
+    <Compile Include="commands\__init__.py" />
+    <Compile Include="server\conf\at_initial_setup.py" />
+    <Compile Include="server\conf\at_search.py" />
+    <Compile Include="server\conf\at_server_startstop.py" />
+    <Compile Include="server\conf\cmdparser.py" />
+    <Compile Include="server\conf\connection_screens.py" />
+    <Compile Include="server\conf\inlinefunc.py" />
+    <Compile Include="server\conf\lockfuncs.py" />
+    <Compile Include="server\conf\mssp.py" />
+    <Compile Include="server\conf\oobfuncs.py" />
+    <Compile Include="server\conf\portal_services_plugins.py" />
+    <Compile Include="server\conf\serversession.py" />
+    <Compile Include="server\conf\server_services_plugins.py" />
+    <Compile Include="server\conf\settings.py" />
+    <Compile Include="server\conf\__init__.py" />
+    <Compile Include="server\__init__.py" />
+    <Compile Include="typeclasses\channels.py" />
+    <Compile Include="typeclasses\characters.py" />
+    <Compile Include="typeclasses\exits.py" />
+    <Compile Include="typeclasses\objects.py" />
+    <Compile Include="typeclasses\players.py" />
+    <Compile Include="typeclasses\rooms.py" />
+    <Compile Include="typeclasses\scripts.py" />
+    <Compile Include="typeclasses\__init__.py" />
+    <Compile Include="web\urls.py" />
+    <Compile Include="web\__init__.py" />
+    <Compile Include="world\charsheet_template.py" />
+    <Compile Include="world\prototypes.py" />
+    <Compile Include="world\__init__.py" />
+    <Compile Include="__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web\static\admin\css\base.css" />
+    <Content Include="web\static\admin\css\changelists.css" />
+    <Content Include="web\static\admin\css\dashboard.css" />
+    <Content Include="web\static\admin\css\forms.css" />
+    <Content Include="web\static\admin\css\ie.css" />
+    <Content Include="web\static\admin\css\login.css" />
+    <Content Include="web\static\admin\css\rtl.css" />
+    <Content Include="web\static\admin\css\widgets.css" />
+    <Content Include="web\static\admin\img\changelist-bg.gif" />
+    <Content Include="web\static\admin\img\changelist-bg_rtl.gif" />
+    <Content Include="web\static\admin\img\default-bg-reverse.gif" />
+    <Content Include="web\static\admin\img\default-bg.gif" />
+    <Content Include="web\static\admin\img\deleted-overlay.gif" />
+    <Content Include="web\static\admin\img\gis\move_vertex_off.png" />
+    <Content Include="web\static\admin\img\gis\move_vertex_on.png" />
+    <Content Include="web\static\admin\img\icon-no.gif" />
+    <Content Include="web\static\admin\img\icon-unknown.gif" />
+    <Content Include="web\static\admin\img\icon-yes.gif" />
+    <Content Include="web\static\admin\img\icon_addlink.gif" />
+    <Content Include="web\static\admin\img\icon_alert.gif" />
+    <Content Include="web\static\admin\img\icon_calendar.gif" />
+    <Content Include="web\static\admin\img\icon_changelink.gif" />
+    <Content Include="web\static\admin\img\icon_clock.gif" />
+    <Content Include="web\static\admin\img\icon_deletelink.gif" />
+    <Content Include="web\static\admin\img\icon_error.gif" />
+    <Content Include="web\static\admin\img\icon_searchbox.png" />
+    <Content Include="web\static\admin\img\icon_success.gif" />
+    <Content Include="web\static\admin\img\inline-delete-8bit.png" />
+    <Content Include="web\static\admin\img\inline-delete.png" />
+    <Content Include="web\static\admin\img\inline-restore-8bit.png" />
+    <Content Include="web\static\admin\img\inline-restore.png" />
+    <Content Include="web\static\admin\img\inline-splitter-bg.gif" />
+    <Content Include="web\static\admin\img\nav-bg-grabber.gif" />
+    <Content Include="web\static\admin\img\nav-bg-reverse.gif" />
+    <Content Include="web\static\admin\img\nav-bg-selected.gif" />
+    <Content Include="web\static\admin\img\nav-bg.gif" />
+    <Content Include="web\static\admin\img\selector-icons.gif" />
+    <Content Include="web\static\admin\img\selector-search.gif" />
+    <Content Include="web\static\admin\img\sorting-icons.gif" />
+    <Content Include="web\static\admin\img\tooltag-add.png" />
+    <Content Include="web\static\admin\img\tooltag-arrowright.png" />
+    <Content Include="web\static\admin\js\actions.js" />
+    <Content Include="web\static\admin\js\actions.min.js" />
+    <Content Include="web\static\admin\js\admin\DateTimeShortcuts.js" />
+    <Content Include="web\static\admin\js\admin\RelatedObjectLookups.js" />
+    <Content Include="web\static\admin\js\calendar.js" />
+    <Content Include="web\static\admin\js\collapse.js" />
+    <Content Include="web\static\admin\js\collapse.min.js" />
+    <Content Include="web\static\admin\js\core.js" />
+    <Content Include="web\static\admin\js\inlines.js" />
+    <Content Include="web\static\admin\js\inlines.min.js" />
+    <Content Include="web\static\admin\js\jquery.init.js" />
+    <Content Include="web\static\admin\js\jquery.js" />
+    <Content Include="web\static\admin\js\jquery.min.js" />
+    <Content Include="web\static\admin\js\LICENSE-JQUERY.txt" />
+    <Content Include="web\static\admin\js\prepopulate.js" />
+    <Content Include="web\static\admin\js\prepopulate.min.js" />
+    <Content Include="web\static\admin\js\related-widget-wrapper.js" />
+    <Content Include="web\static\admin\js\SelectBox.js" />
+    <Content Include="web\static\admin\js\SelectFilter2.js" />
+    <Content Include="web\static\admin\js\timeparse.js" />
+    <Content Include="web\static\admin\js\urlify.js" />
+    <Content Include="web\static\evennia_general\css\prosimii-print.css" />
+    <Content Include="web\static\evennia_general\css\prosimii-screen-alt.css" />
+    <Content Include="web\static\evennia_general\css\prosimii-screen.css" />
+    <Content Include="web\static\evennia_general\images\evennia_logo.png" />
+    <Content Include="web\static\evennia_general\images\favicon.ico" />
+    <Content Include="web\static\webclient\css\webclient.css" />
+    <Content Include="web\static\webclient\js\evennia_ajax_webclient.js" />
+    <Content Include="web\static\webclient\js\evennia_websocket_webclient.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="commands" />
+    <Folder Include="server" />
+    <Folder Include="server\conf" />
+    <Folder Include="typeclasses" />
+    <Folder Include="web" />
+    <Folder Include="web\static\" />
+    <Folder Include="web\static\admin\" />
+    <Folder Include="web\static\admin\css" />
+    <Folder Include="web\static\admin\img" />
+    <Folder Include="web\static\admin\img\gis" />
+    <Folder Include="web\static\admin\js" />
+    <Folder Include="web\static\admin\js\admin" />
+    <Folder Include="web\static\evennia_general\" />
+    <Folder Include="web\static\evennia_general\css" />
+    <Folder Include="web\static\evennia_general\images" />
+    <Folder Include="web\static\webclient\" />
+    <Folder Include="web\static\webclient\css" />
+    <Folder Include="web\static\webclient\js" />
+    <Folder Include="world" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{80659ab7-4d53-4e0c-8588-a766116cbd46}\2.7" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>

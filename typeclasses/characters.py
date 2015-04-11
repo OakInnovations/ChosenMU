@@ -255,7 +255,7 @@ class Character(DefaultCharacter):
     def at_tick(self, *args, **kwargs):
         #trying to keep a " 'Character' object has no attribute 'at_tick' " error from happening.
         pass
-	
+
     def return_appearance(self,looker):
         """
         This formats a description. It is the hook a 'look' command
